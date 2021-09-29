@@ -5,6 +5,41 @@
 </ion-header>
 
 <ion-content>
-  <h1>RAMA LOGIN</h1>
+  <ion-grid >
+    <ion-row class="ion-align-items-center">
+      <ion-col >
+       <h1 class="ion-text-center">BIENVENIDO!</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-grid>
+    <ion-row class="ion-margin-top">
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating" >Usuario</ion-label>
+          <ion-input maxlength="8" minlength="3" [(ngModel)]="user.name"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" maxlength="4" minlength="4" inputmode="numeric"
+          [(ngModel)]="user.password"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-button class="ion-margin-top" expand="block" color="warning" (click)="goToHome()">ingresar</ion-button>
+    <p class="ion-text-center">recuperar contraseña</p>
+    <!-- <ion-label class="ion-text-center" color="secondary">Secondary Label</ion-label> -->
+
+   <!-- TEST -->
+   <span>test</span>
+   <p>username:{{user.name}}</p>
+   <p>user.psw:{{user.password}}</p>
+  </ion-grid>
 
 </ion-content>

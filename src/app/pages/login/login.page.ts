@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {NavController} from '@ionic/angular';
 import { NavigationExtras } from '@angular/router';
 
+
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -25,7 +28,14 @@ export class LoginPage implements OnInit {
         user: JSON.stringify(this.user)
       }
     };
-    this.navController.navigateForward(['home/'], navugationExtras)
+
+    if(this.user.name.length < 3 || this.user.password.length < 4){
+     
+    }
+    else{
+      this.navController.navigateForward(['home/'], navugationExtras)
+    }
+    
   }
 
 
