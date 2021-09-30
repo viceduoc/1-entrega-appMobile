@@ -6,4 +6,13 @@
 
 <ion-content>
 
+<ion-input type="text" placeholder="Usuario" [(ngModel)]="user.username"></ion-input>
+<ion-input type="password" placeholder="Ingrese nueva password" [(ngModel)]="user.password1"></ion-input>
+<ion-input type="password" placeholder="Repita nueva password" [(ngModel)]="user.password2"></ion-input>
+<ion-button (click)="validaPassword()" expand="block" shape="round">
+  Recuperar
+</ion-button>
+<ion-button [routerLink]="['/login']" expand="block" fill="clear" shape="round">
+  Volver
+</ion-button>
 </ion-content>
