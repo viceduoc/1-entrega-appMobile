@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {NavController} from '@ionic/angular';
+import {AlertController, NavController} from '@ionic/angular';
 import { NavigationExtras } from '@angular/router';
+
+
+
 
 
 
@@ -13,14 +16,16 @@ import { NavigationExtras } from '@angular/router';
 export class LoginPage implements OnInit {
 
   user:any = {
-    name:null,
-    password:null
+    name:"",
+    password:""
   }
 
-  constructor(public navController:NavController) { }
+  constructor(public navController:NavController, private alertCtrl: AlertController) { }
 
   ngOnInit() {
   }
+
+  
 
   goToHome(){
     const navugationExtras: NavigationExtras={
@@ -34,10 +39,23 @@ export class LoginPage implements OnInit {
       this.navController.navigateForward(['home/'], navugationExtras)
     }
     else{
-      
+      this.alertError();
       
     }
+
     
+  }
+
+
+  alertError(){
+    this.alertCtrl.create({
+      header:"Al parecer faltan algunos dsaatos",
+      message: 'Username: 4-8 caracteres ',
+      buttons: ['OK']
+      
+    }).then( res => {
+      res.present();
+    })
   }
 
 
