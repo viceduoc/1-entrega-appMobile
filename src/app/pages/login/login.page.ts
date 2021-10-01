@@ -29,11 +29,13 @@ export class LoginPage implements OnInit {
       }
     };
 
-    if(this.user.name.length < 3 || this.user.password.length < 4){
-     
+    if(this.user.name.length >= 3 && this.user.password.length == 4){
+
+      this.navController.navigateForward(['home/'], navugationExtras)
     }
     else{
-      this.navController.navigateForward(['home/'], navugationExtras)
+      
+      
     }
     
   }

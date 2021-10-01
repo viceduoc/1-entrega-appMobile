@@ -18,7 +18,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating" >Usuario</ion-label>
-          <ion-input maxlength="8" minlength="3" [(ngModel)]="user.name"></ion-input>
+          <ion-input maxlength="8" minlength="3" [(ngModel)]="user.name" required></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -26,20 +26,18 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" maxlength="4" minlength="4" inputmode="numeric"
+          <ion-input type="password" maxlength="4" minlength="4" inputmode="numeric" required
           [(ngModel)]="user.password"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
 
-    <ion-button class="ion-margin-top" expand="block" color="warning" (click)="goToHome()">ingresar</ion-button>
-    <p class="ion-text-center">recuperar contraseña</p>
-    <!-- <ion-label class="ion-text-center" color="secondary">Secondary Label</ion-label> -->
-
-   <!-- TEST -->
-   <span>test</span>
-   <p>username:{{user.name}}</p>
-   <p>user.psw:{{user.password}}</p>
+    <ion-button class="ion-margin-top" expand="block" color="success" (click)="goToHome()">ingresar</ion-button>
+    <ion-button  routerLink="/pswd-recovery" expand="full" size="small" fill="clear" shape="round" color="warning" class="ion-margin-top">
+      recuperar contraseña
+    </ion-button>
+    
+  
   </ion-grid>
 
 </ion-content>
