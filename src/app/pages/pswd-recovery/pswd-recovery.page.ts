@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PswdRecoveryPage implements OnInit {
 
   user:any = {
-    username : "",
+    name : "",
     password1 : "",
     password2 : ""
   };
@@ -18,7 +18,9 @@ export class PswdRecoveryPage implements OnInit {
     this.activatedRoute.queryParams.subscribe(
         params => {
           if (this.router.getCurrentNavigation().extras.state){
-            this.user.username = this.router.getCurrentNavigation().extras.state.user.username;
+            this.user.name = this.router.getCurrentNavigation().extras.state.user.name;
+
+            console.log(this.user)
           }
         }
     )
@@ -26,7 +28,7 @@ export class PswdRecoveryPage implements OnInit {
   };
 
   validaPassword(){
-    if (this.user.password1 == this.user.password2 && this.user.password1.length > 0 && this.user.username.length > 0){
+    if (this.user.password1 == this.user.password2 && this.user.password1.length > 0 && this.user.name.length > 0){
       console.log('Passwords validas. Redirigiendo...')
 
       this.router.navigate(['login'])
@@ -34,6 +36,12 @@ export class PswdRecoveryPage implements OnInit {
     else {
       console.log("No coinciden.")
     }
+  }
+
+  limpiarCampos(){
+    this.user.name = ""
+    this.user.password1 = ""
+    this.user.password2 = ""
   }
 
   ngOnInit() {
