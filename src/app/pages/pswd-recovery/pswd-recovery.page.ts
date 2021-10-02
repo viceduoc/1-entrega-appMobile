@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import {AlertController, NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-pswd-recovery',
@@ -14,7 +15,7 @@ export class PswdRecoveryPage implements OnInit {
     password2 : ""
   };
 
-  constructor(private activatedRoute:ActivatedRoute, private router:Router) {
+  constructor(private activatedRoute:ActivatedRoute, private router:Router, private alertCtrl: AlertController) {
     this.activatedRoute.queryParams.subscribe(
         params => {
           if (this.router.getCurrentNavigation().extras.state){
@@ -30,7 +31,7 @@ export class PswdRecoveryPage implements OnInit {
   validaPassword(){
     if (this.user.password1 == this.user.password2 && this.user.password1.length > 0 && this.user.name.length > 0){
       console.log('Passwords validas. Redirigiendo...')
-
+      this.alertError()
       this.router.navigate(['login'])
     }
     else {
@@ -42,6 +43,17 @@ export class PswdRecoveryPage implements OnInit {
     this.user.name = ""
     this.user.password1 = ""
     this.user.password2 = ""
+  }
+
+  alertError(){
+    this.alertCtrl.create({
+      header:"Credenciales modificadas",
+      message: 'Credenciales correctamente modificadas',
+      buttons: ['OK']
+      
+    }).then( res => {
+      res.present();
+    })
   }
 
   ngOnInit() {

@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
 
   alertError(){
     this.alertCtrl.create({
-      header:"Al parecer faltan algunos dsaatos",
+      header:"Por favor complete sus datos",
       message: 'Username: 4-8 caracteres ',
       buttons: ['OK']
       
