@@ -20,10 +20,9 @@ export class LoginPage implements OnInit {
     password:""
   }
 
-  constructor(public navController:NavController, private alertCtrl: AlertController) { }
+  constructor(public navController:NavController, private alertCtrl: AlertController) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   
 
