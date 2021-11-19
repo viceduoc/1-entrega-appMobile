@@ -1,9 +1,53 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>pswd-recovery</ion-title>
+    <ion-title>Recupera tu contraseña</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <ion-grid>
+    <ion-row class="ion-margin-top">
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating" >Usuario</ion-label>
+          <ion-input maxlength="8" minlength="3" [(ngModel)]="user.name" required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Contraseña nueva</ion-label>
+          <ion-input type="password" maxlength="4" minlength="4" inputmode="numeric" required
+          [(ngModel)]="user.password1"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Repita contraseña</ion-label>
+          <ion-input type="password" maxlength="4" minlength="4" inputmode="numeric" required
+          [(ngModel)]="user.password2"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-button (click)="validaPassword()" expand="block" shape="round" color="success">
+      Recuperar
+    </ion-button>
+    <ion-button (click)="limpiarCampos()" expand="block" shape="round" color="secondary">
+      Limpiar
+    </ion-button>
+    <ion-button [routerLink]="['/login']" expand="block" fill="clear" shape="round">
+      Volver
+    </ion-button>
+</ion-grid>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <app-footer></app-footer>
+  </ion-toolbar>
+</ion-footer>

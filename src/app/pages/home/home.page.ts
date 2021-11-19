@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,22 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  user:any = {
+    name : ""
+
+  };
+
+
+  constructor(private activatedRoute:ActivatedRoute, private router:Router) {
+    this.activatedRoute.queryParams.subscribe(
+      params => {
+        
+          this.user = JSON.parse(params.user);
+        
+      }
+  )
+  }
+
+  
 
 }

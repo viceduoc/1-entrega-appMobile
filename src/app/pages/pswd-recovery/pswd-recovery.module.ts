@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { PswdRecoveryPageRoutingModule } from './pswd-recovery-routing.module';
 
 import { PswdRecoveryPage } from './pswd-recovery.page';
+import { FooterComponent } from 'src/app/components/footer/footer.component';
+
 
 @NgModule({
   imports: [
@@ -15,6 +17,6 @@ import { PswdRecoveryPage } from './pswd-recovery.page';
     IonicModule,
     PswdRecoveryPageRoutingModule
   ],
-  declarations: [PswdRecoveryPage]
+  declarations: [PswdRecoveryPage, FooterComponent]
 })
 export class PswdRecoveryPageModule {}
