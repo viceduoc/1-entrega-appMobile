@@ -17,8 +17,8 @@
     <ion-row class="ion-margin-top">
       <ion-col>
         <ion-item>
-          <ion-label position="floating" >Usuario</ion-label>
-          <ion-input maxlength="8" minlength="3" [(ngModel)]="user.name" required></ion-input>
+          <ion-label position="floating" >Correo</ion-label>
+          <ion-input type="email" maxlength="30" minlength="3" [(ngModel)]="user.email" required></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -26,7 +26,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" maxlength="4" minlength="4" inputmode="numeric" required
+          <ion-input type="password" maxlength="20" minlength="4" inputmode="numeric" required
           [(ngModel)]="user.password"></ion-input>
         </ion-item>
       </ion-col>

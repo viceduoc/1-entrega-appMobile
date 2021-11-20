@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AlertController, NavController} from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { NavigationExtras } from '@angular/router';
+import { DbSqliteService } from 'src/app/services/db-sqlite.service';
 
 
 
@@ -15,48 +16,60 @@ import { NavigationExtras } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  user:any = {
-    name:"",
-    password:""
-  }
-
-  constructor(public navController:NavController, private alertCtrl: AlertController) {}
-
-  ngOnInit() {}
-
-  
-
-  goToHome(){
-    const navugationExtras: NavigationExtras={
-      queryParams:{
-        user: JSON.stringify(this.user)
-      }
-    };
-
-    if(this.user.name.length >= 3 && this.user.password.length == 4){
-
-      this.navController.navigateForward(['home/'], navugationExtras)
-    }
-    else{
-      this.alertError();
-      
-    }
-
-    
+  user: any = {
+    name: "",
+    email: "",
+    password: ""
   }
 
 
-  alertError(){
+
+
+  constructor(public navController: NavController, private alertCtrl: AlertController, private dbSqlite: DbSqliteService) { }
+
+  ngOnInit() {
+
+
+  }
+
+
+
+  goToHome() {
+    // Preguntar a la base si credenciales con correctas
+
+    let ok = this.dbSqlite.validoLogin(this.user.email, this.user.password)
+      .then(() => {
+
+        if (this.dbSqlite.user.ready) {
+          const navugationExtras: NavigationExtras = {
+            queryParams: {
+              user: JSON.stringify(this.dbSqlite.user)
+            }
+          };
+          this.navController.navigateForward(['home/'], navugationExtras)
+        }
+        else {
+          this.alertError();
+        }
+
+      })
+      .catch(e => {
+        console.log('Error al consultar la base de datos.');
+      })
+
+  }
+
+
+  alertError() {
     this.alertCtrl.create({
-      header:"Por favor complete sus datos",
-      message: 'Username: 4-8 caracteres ',
+      header: "Credenciales incorrectas",
+      message: 'Credenciales ingresadas no son válidas',
       buttons: ['OK']
-      
-    }).then( res => {
+
+    }).then(res => {
       res.present();
     })
   }
 
 
 }
- 
