@@ -42,7 +42,7 @@ export class DbSqliteService {
   //Crea base de datos si no existe y inicializo datos iniciales
   createDB() {
     this.sqlite.create({ name: this.database_name, location: 'default' })
-      .then((db: SQLiteObject) => { this.databaseObj = db; alert('Base de datos creada'); })
+      .then((db: SQLiteObject) => { this.databaseObj = db;  })
       .then(() => { this.createTable(); })
       .then(() => { this.inicializarUsuarios(); })
       .catch(e => { alert('error' + JSON.stringify(e)) });
@@ -52,7 +52,6 @@ export class DbSqliteService {
   //Crea tabla personas
   createTable() {
     this.databaseObj.executeSql('CREATE TABLE IF NOT EXISTS ' + this.table_name + '(pid INTEGER PRIMARY KEY, nombre varchar(40), email varchar(30), password varchar(20), isconfirmed integer, recovercode varchar(6))', [])
-      .then(() => { alert('Tabla ' + this.table_name + ' creada') })
       .catch(e => { alert('error ' + JSON.stringify(e)) });
   }
 
@@ -84,7 +83,7 @@ export class DbSqliteService {
     return new Promise((resolve, reject) => {
 
       this.user.ready = false;
-      this.databaseObj.executeSql('SELECT * FROM ' + this.table_name + ' WHERE email = "' + username + '" and password = "' + password + '"', [])
+      this.databaseObj.executeSql('SELECT * FROM ' + this.table_name + ' WHERE email = "' + username + '" and password = "' + password + '" and isconfirmed = 1', [])
       .then((res) => {
         this.row_data = [];
         if (res.rows.length > 0) {
@@ -108,8 +107,74 @@ export class DbSqliteService {
 
     })
 
+  }
+
+  validarCorreo(username: string):Promise<any> {
+
+    return new Promise((resolve, reject) => {
+
+      this.user.email = "";
+      this.databaseObj.executeSql('SELECT * FROM ' + this.table_name + ' WHERE email = "' + username + '"', [])
+      .then((res) => {
+        this.row_data = [];
+        if (res.rows.length > 0) {
+
+          this.user.pid = res.rows.item(0).pid;
+          this.user.name = res.rows.item(0).nombre;
+          this.user.email = res.rows.item(0).email;
+          console.log('Correo encontrado');
+
+          resolve (true);
+
+        }
+        else {
+          console.log('Correo no encontrado');
+          this.user.ready = false;
+          resolve (false);
+        }
+      })
+      .catch(e => { reject(false) });
+    })
+  }
+
+  //Actualiza tabla personas
+  marcarCambioPass() {
+
+    let randomcode = Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 6);
+
+    this.databaseObj.executeSql('UPDATE ' + this.table_name + ' SET recovercode = "' + randomcode + '", isconfirmed = 0 WHERE pid = ' + this.user.pid, [])
+      .then(() => { this.recargarDatosUsuario(); })
+      .catch(e => { alert('error ' + JSON.stringify(e)) });
 
   }
+
+  updatePassword(id:number, password:string) {
+
+    this.databaseObj.executeSql('UPDATE ' + this.table_name + ' SET password = "' + password + '", isconfirmed = 1 WHERE pid = ' + id, [])
+      .then(() => { this.recargarDatosUsuario(); })
+      .catch(e => { alert('error ' + JSON.stringify(e)) });
+
+  }
+
+  recargarDatosUsuario() {
+    this.databaseObj.executeSql('SELECT * FROM ' + this.table_name  + ' WHERE pid = "' + this.user.pid + '"', [])
+      .then((res) => {
+        this.row_data = [];
+        if (res.rows.length > 0) {
+          this.user.pid = res.rows.item(0).pid;
+          this.user.name = res.rows.item(0).nombre;
+          this.user.email = res.rows.item(0).email;
+          this.user.recovercode = res.rows.item(0).recovercode;
+
+          console.log('EL codigo de recuperacion es = ' + this.user.recovercode);
+          
+        }
+      }
+      )
+      .catch(e => { alert('error ' + JSON.stringify(e)) });
+  }
+
+
   //Retorna filas de la tabla personas
   getRows() {
     this.databaseObj.executeSql('SELECT * FROM ' + this.table_name, [])
