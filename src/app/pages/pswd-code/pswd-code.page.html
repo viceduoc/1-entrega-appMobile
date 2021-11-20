@@ -6,21 +6,22 @@
 
 <ion-content>
 
+  <ion-label>
+    <p>Ingresa el código</p>
+    <h2>Se ha enviado un código a tu correo</h2>
+  </ion-label>
   <ion-grid>
     <ion-row class="ion-margin-top">
       <ion-col>
         <ion-item>
-          <ion-label position="floating" >Correo</ion-label>
-          <ion-input type="email" maxlength="40" minlength="3" [(ngModel)]="user.name" required></ion-input>
+          <ion-label position="floating" >Código</ion-label>
+          <ion-input maxlength="6" minlength="6" [(ngModel)]="codigo" required></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
 
-    <ion-button (click)="obtenerCodigo()" expand="block" shape="round" color="success">
+    <ion-button (click)="confirmarCodigo()" expand="block" shape="round" color="success">
       Recuperar
-    </ion-button>
-    <ion-button (click)="limpiarCampos()" expand="block" shape="round" color="secondary">
-      Limpiar
     </ion-button>
     <ion-button [routerLink]="['/login']" expand="block" fill="clear" shape="round">
       Volver

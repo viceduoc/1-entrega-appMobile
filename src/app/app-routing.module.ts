@@ -18,7 +18,19 @@ const routes: Routes = [
   {
     path: 'pswd-recovery',
     loadChildren: () => import('./pages/pswd-recovery/pswd-recovery.module').then( m => m.PswdRecoveryPageModule)
+  },  {
+    path: 'pswd-code',
+    loadChildren: () => import('./pages/pswd-code/pswd-code.module').then( m => m.PswdCodePageModule)
   },
+  {
+    path: 'pswd-change',
+    loadChildren: () => import('./pages/pswd-change/pswd-change.module').then( m => m.PswdChangePageModule)
+  },
+  {
+    path: 'user-update',
+    loadChildren: () => import('./pages/user-update/user-update.module').then( m => m.UserUpdatePageModule)
+  },
+
 
 ];
 

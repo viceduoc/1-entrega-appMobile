@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import {AlertController, NavController} from '@ionic/angular';
+import { DbSqliteService } from 'src/app/services/db-sqlite.service';
 
 @Component({
   selector: 'app-pswd-recovery',
@@ -10,12 +11,10 @@ import {AlertController, NavController} from '@ionic/angular';
 export class PswdRecoveryPage implements OnInit {
 
   user:any = {
-    name : "",
-    password1 : "",
-    password2 : ""
+    name : ""
   };
 
-  constructor(private activatedRoute:ActivatedRoute, private router:Router, private alertCtrl: AlertController) {
+  constructor(private activatedRoute:ActivatedRoute, private router:Router, private alertCtrl: AlertController, private dbSqlite: DbSqliteService, public navController: NavController ) {
     this.activatedRoute.queryParams.subscribe(
         params => {
           if (this.router.getCurrentNavigation().extras.state){
@@ -28,27 +27,44 @@ export class PswdRecoveryPage implements OnInit {
 
   };
 
-  validaPassword(){
-    if (this.user.password1 == this.user.password2 && this.user.password1.length > 0 && this.user.name.length > 0){
-      console.log('Passwords validas. Redirigiendo...')
-      this.alertError()
-      this.router.navigate(['login'])
-    }
-    else {
-      console.log("No coinciden.")
-    }
+  obtenerCodigo() {
+    // Preguntar a la base si credenciales con correctas
+
+    let ok = this.dbSqlite.validarCorreo(this.user.name)
+      .then(() => {
+
+        if (this.dbSqlite.user.email != "") {
+
+          
+
+          const navugationExtras: NavigationExtras = {
+            queryParams: {
+              user: JSON.stringify(this.dbSqlite.user)
+            }
+          };
+          this.navController.navigateForward(['pswd-code/'], navugationExtras)
+        }
+        else {
+          this.alertError();
+        }
+
+      })
+      .catch(e => {
+        console.log('Error al consultar la base de datos.');
+      })
+
   }
+
 
   limpiarCampos(){
     this.user.name = ""
-    this.user.password1 = ""
-    this.user.password2 = ""
+
   }
 
   alertError(){
     this.alertCtrl.create({
-      header:"Credenciales modificadas",
-      message: 'Credenciales correctamente modificadas',
+      header:"Correo no encontrado",
+      message: 'Correo ingresado no existe',
       buttons: ['OK']
       
     }).then( res => {
