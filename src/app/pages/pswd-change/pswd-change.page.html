@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cambia tu contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <h3>Ingresa tu nueva contraseña</h3>
+  <ion-grid>
+    <ion-row class="ion-margin-top">
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating" >Ingrese su contraseña</ion-label>
+          <ion-input type="password" maxlength="20" minlength="3" [(ngModel)]="ps1" required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-top">
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating" >Ingrese su contraseña nuevamente</ion-label>
+          <ion-input type="password"  maxlength="20" minlength="3" [(ngModel)]="ps2" required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-button (click)="cambiarPassword()" expand="block" shape="round" color="success">
+      Cambiar contraseña
+    </ion-button>
+    <ion-button [routerLink]="['/login']" expand="block" fill="clear" shape="round">
+      Volver
+    </ion-button>
+</ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <app-footer></app-footer>
+  </ion-toolbar>
+</ion-footer>
