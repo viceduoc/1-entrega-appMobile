@@ -9,21 +9,42 @@
 <ion-content [fullscreen]="true">
 
 
-  <h1 class="ion-text-center ion-margin-top">Bienvenido!</h1>
-  <ion-text color="primary" class="ion-text-capitalize ion-text-center">
-    <h3>{{user.name}}</h3>
-  </ion-text>
+  <ion-grid >
+    <ion-row class="ion-align-items-center">
+      <ion-col >
+       <h1 class="ion-text-center">Benvenido!</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 
-<ion-button routerLink="/login" expand="block" fill="clear" shape="round" color="danger" class="ion-justify-content-end">
-  cerrar sesión
-</ion-button>
+  <ion-card class="ion-margin-top">
+    <img src="https://www.duoc.cl/wp-content/uploads/2020/06/header-apoyo-960x440.png" />
+    <ion-card-header>
+      <ion-card-subtitle color="primary">{{user.email}}</ion-card-subtitle>
+      <ion-card-title>{{user.name}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Tu número de asistencia es: 0
+    </ion-card-content>
+  </ion-card>
 
-</ion-content>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="asistencia">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+      <ion-label>Ver asistencia</ion-label>
+    </ion-tab-button>
 
+    <ion-tab-button tab="qr">
+      <ion-icon name="qr-code-outline"></ion-icon>
+      <ion-label>Leer QR</ion-label>
+    </ion-tab-button>
 
-<ion-footer>
-  <ion-toolbar>
-    <app-footer></app-footer>
-  </ion-toolbar>
-</ion-footer>
+    <ion-tab-button tab="login">
+      <ion-icon name="exit-outline" routerLink="/login"></ion-icon>
+      <ion-label>Cerrar sesión</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
