@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'pswd-change',
     loadChildren: () => import('./pages/pswd-change/pswd-change.module').then( m => m.PswdChangePageModule)
   },
+  {
+    path: 'user-update',
+    loadChildren: () => import('./pages/user-update/user-update.module').then( m => m.UserUpdatePageModule)
+  },
 
 
 ];

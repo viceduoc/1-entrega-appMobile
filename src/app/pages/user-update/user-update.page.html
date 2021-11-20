@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      RegistrAPP
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col>
+        <h1 class="ion-text-center">Modifica tus datos</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+<ion-label position="floating">Nombre</ion-label>
+<ion-input type="text" [(ngModel)]="user.name"></ion-input>
+
+<ion-button (click)="updateNombre()" expand="block" color="success">
+  Guardar
+</ion-button>
+<ion-button [routerLink]="['/home']" expand="block" >
+  Volver
+</ion-button>
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <app-footer></app-footer>
+  </ion-toolbar>
+</ion-footer>

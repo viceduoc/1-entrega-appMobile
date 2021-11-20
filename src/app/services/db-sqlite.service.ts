@@ -156,6 +156,14 @@ export class DbSqliteService {
 
   }
 
+  updateNombre(id:number, nombre:string) {
+
+    this.databaseObj.executeSql('UPDATE ' + this.table_name + ' SET nombre = "' + nombre + '" WHERE pid = ' + id, [])
+      .then(() => { this.recargarDatosUsuario(); })
+      .catch(e => { alert('error ' + JSON.stringify(e)) });
+
+  }
+
   recargarDatosUsuario() {
     this.databaseObj.executeSql('SELECT * FROM ' + this.table_name  + ' WHERE pid = "' + this.user.pid + '"', [])
       .then((res) => {

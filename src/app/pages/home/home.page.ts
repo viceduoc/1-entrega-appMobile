@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HomePage {
 
   user:any = {
-    name : ""
+    name : "",
+    pid : null,
+    email : ""
 
   };
 
 
-  constructor(private activatedRoute:ActivatedRoute, private router:Router) {
+  constructor(private activatedRoute:ActivatedRoute, private router:Router, public navController: NavController) {
     this.activatedRoute.queryParams.subscribe(
       params => {
         
@@ -24,6 +27,15 @@ export class HomePage {
   )
   }
 
+  modificarDatos(){
+
+    const navugationExtras: NavigationExtras = {
+      queryParams: {
+        user: JSON.stringify(this.user)
+      }
+    };
+    this.navController.navigateForward(['user-update/'], navugationExtras)
+  }
   
 
 }
