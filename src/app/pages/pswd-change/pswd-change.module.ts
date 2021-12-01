@@ -16,6 +16,6 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
     IonicModule,
     PswdChangePageRoutingModule
   ],
-  declarations: [PswdChangePage, FooterComponent]
+  declarations: [PswdChangePage]
 })
 export class PswdChangePageModule {}

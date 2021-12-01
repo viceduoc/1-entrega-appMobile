@@ -16,6 +16,6 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
     IonicModule,
     UserUpdatePageRoutingModule
   ],
-  declarations: [UserUpdatePage, FooterComponent]
+  declarations: [UserUpdatePage]
 })
 export class UserUpdatePageModule {}
