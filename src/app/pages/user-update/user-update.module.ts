@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { UserUpdatePageRoutingModule } from './user-update-routing.module';
 
 import { UserUpdatePage } from './user-update.page';
-import { FooterComponent } from 'src/app/components/footer/footer.component';
+
 
 @NgModule({
   imports: [
@@ -16,6 +16,6 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
     IonicModule,
     UserUpdatePageRoutingModule
   ],
-  declarations: [UserUpdatePage, FooterComponent]
+  declarations: [UserUpdatePage]
 })
 export class UserUpdatePageModule {}
