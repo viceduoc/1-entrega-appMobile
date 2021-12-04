@@ -35,7 +35,7 @@
         <ion-icon name="create" slot="start"></ion-icon>
         <ion-label >Modificar datos</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item [routerLink]="['/lectorqr']">
         <ion-icon name="qr-code-outline" slot="start"></ion-icon>
         <ion-label>Registrar asistencia</ion-label>
       </ion-item>
@@ -54,12 +54,12 @@
       <ion-label>Ver asistencia</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="qr">
+    <ion-tab-button tab="qr" [routerLink]="['/lectorqr']">
       <ion-icon name="qr-code-outline"></ion-icon>
       <ion-label>Leer QR</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="login" [routerLink]="['/home']">
+    <ion-tab-button tab="login" [routerLink]="['/login']">
       <ion-icon name="exit-outline" ></ion-icon>
       <ion-label>Cerrar sesión</ion-label>
     </ion-tab-button>

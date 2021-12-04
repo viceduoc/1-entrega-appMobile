@@ -30,6 +30,10 @@ const routes: Routes = [
     path: 'user-update',
     loadChildren: () => import('./pages/user-update/user-update.module').then( m => m.UserUpdatePageModule)
   },
+  {
+    path: 'lectorqr',
+    loadChildren: () => import('./pages/lectorqr/lectorqr.module').then( m => m.LectorqrPageModule)
+  },
 
 
 ];

@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      RegistrAPP
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+<ion-button (click)="leerQR()" expand="block" shape="round">
+  Leer QR
+</ion-button>
+
+<div *ngIf="escaneo">
+  
+  <p>{{ escaneo["text"] }}</p>
+
+</div>
+
+
+</ion-content>
+
